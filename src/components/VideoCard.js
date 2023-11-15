@@ -1,15 +1,26 @@
 import React from 'react'
 
-const VideoCard = ({videoList}) => {
-    console.log('Fetched Successfully')
-    console.log(videoList)
+const VideoCard = ({info}) => {
+    console.log('Fetched Successfully in videocard')
+    console.log(info)
+
+    const{snippet,statistics}=info;
+    const{channelTitle,title,thumbnails}=snippet
+
+
+
+
   return (
-    <div>
-      <div className='w-40 h-40 shadow-lg m-3 p-3'>
-        <div>{ <img alt='vidoes' src={videoList?.snippet?.thumbnails?.medium?.url}/> }</div>
     
+      <div className='p-2 m-2 w-72 shadow-lg'>
+       <img className='rounded-lg' alt='thumbnail' src={thumbnails.medium.url}/>
+      <ul>
+        <li className='font-bold'>{title}</li>
+        <li>{channelTitle}</li>
+        <li>{statistics.viewCount} Views</li>
+      </ul>
       </div>
-    </div>
+    
   )
 }
 

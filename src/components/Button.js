@@ -5,7 +5,7 @@ const Button = ({buttonlist}) => {
   return (
     <div>
       
-      <div className='m-5 bg-gray-500 text-white rounded-full p-3'>{buttonlist}</div>
+      <div className='px-5 p-2 m-2 bg-gray-200 rounded-lg'>{buttonlist}</div>
     </div>
   )
 }
