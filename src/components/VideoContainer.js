@@ -8,7 +8,7 @@ const VideoContainer = () => {
 
     // useEffect(()=>{
     //     getVideos();
-    // })
+    // },[])
 
     // const getVideos=async()=>{
     //     const data=await fetch(YOUTUBE_VIDEOS_API);

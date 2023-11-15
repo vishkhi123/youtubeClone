@@ -6,7 +6,7 @@ const SlideBar = () => {
 
     if(isMenuOpen) return null;
   return (
-    <div className="m-5 p-5 shadow-lg">
+    <div className="w-48 p-5 shadow-lg">
       <div className="mt-5">
         <h1>Home</h1>
         <h1>Shots</h1>
