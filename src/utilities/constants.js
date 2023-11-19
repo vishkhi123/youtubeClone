@@ -6,3 +6,5 @@ export const YOUTUBE_VIDEOS_API="https://youtube.googleapis.com/youtube/v3/video
 
 //Authorization: Bearer [YOUR_ACCESS_TOKEN]
 //Accept: application/json
+
+export const YOUTUBE_SEARCH_API="http://suggestqueries.google.com/complete/search?client=firefox&q=";
