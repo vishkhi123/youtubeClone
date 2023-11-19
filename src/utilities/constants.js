@@ -8,3 +8,5 @@ export const YOUTUBE_VIDEOS_API="https://youtube.googleapis.com/youtube/v3/video
 //Accept: application/json
 
 export const YOUTUBE_SEARCH_API="http://suggestqueries.google.com/complete/search?client=firefox&q=";
+
+//https://www.googleapis.com/youtube/v3/search?part=snippet&q=namastejavascript&maxResults=25&key=AIzaSyDP1eLB6jj2GRzyN73imLACHy_rouogykw
