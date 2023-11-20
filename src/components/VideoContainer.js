@@ -3,8 +3,12 @@ import { YOUTUBE_VIDEOS_API } from "../utilities/constants";
 import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
 import CommentContainer from "./CommentContainer";
+import { useSelector } from "react-redux";
 
 const VideoContainer = () => {
+  const searchToggle=useSelector((store)=>store.vsearch);
+  const searchedVidoes=useSelector((store)=>store.vidoes)
+  console.log(searchToggle);
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -14,15 +18,17 @@ const VideoContainer = () => {
   const getVideos = async () => {
     const data = await fetch(YOUTUBE_VIDEOS_API);
     const json = await data.json();
-    //  console.log(json);
+    
     setVideos(json);
     if (videos.length === 0) setVideos(json?.items);
 
-    console.log("Fetched Successfully video cards");
 
-    console.log(videos);
   };
   if (videos.length === 0) return "Empty";
+  if(!searchToggle)
+  {
+    <VideoCard  info={searchedVidoes[0]} />
+  }
 
   return (
     <div className="flex flex-wrap m-5">

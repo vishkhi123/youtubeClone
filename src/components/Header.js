@@ -1,16 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utilities/appSlice";
-import { YOUTUBE_SEARCH_API } from "../utilities/constants";
+import {
+  YOUTUBE_SEARCH_API,
+  YOUTUBE_SEARCH_VIDEO,
+} from "../utilities/constants";
 import { cacheResults } from "../utilities/searchSlice";
+import { searchResults } from "../utilities/videoSearchSlice";
+import VideoCard from "./VideoCard";
+import { toggleSearch } from "../utilities/videoSearch";
+
 
 const Header = () => {
   const searchCache = useSelector((store) => store.search);
+  
 
   const [searchQuery, setSearchQuery] = useState("");
   const [suggetions, setSuggetions] = useState([]);
   const [showSuggetions, setShowSuggetions] = useState(true);
+  const [clickedSearch, setClickedSearch] = useState(false);
+  const [searchedVideos,setSearchedVideos]=useState([]);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    getSearchedVidoes();
+  }, [searchQuery]);
+
+  const getSearchedVidoes = async () => {
+    try {
+      const searchedVidoes = await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchQuery+ "&maxResults=25&key=AIzaSyDP1eLB6jj2GRzyN73imLACHy_rouogykw");
+      const json = await searchedVidoes.json();
+      console.log("Searched Video:", json);
+      setSearchedVideos(json);
+
+      dispatch(
+        searchResults({
+          [searchedVideos]:[json]
+        })
+      )
+      
+    } catch (error) {
+      console.error("Error fetching videos:", error);
+    }
+  };
 
   useEffect(() => {
     //make an api call after every key press
@@ -42,10 +75,12 @@ const Header = () => {
     );
   };
 
-  
-
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
+  };
+
+  const toggleSearchHandler=()=>{
+    dispatch(toggleSearch());
   };
 
   return (
@@ -76,6 +111,8 @@ const Header = () => {
           <button
             className=" border border-gray-400 px-5 p-2 rounded-r-full bg-gray-100"
             type="submit"
+            value={clickedSearch}
+            onClick={() => toggleSearchHandler()}
           >
             🔍
           </button>
